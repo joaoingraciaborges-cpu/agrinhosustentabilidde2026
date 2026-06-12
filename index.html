@@ -1,59 +1,212 @@
-import pygame
-import random
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoTech Reciclagem Eletrônica</title>
 
-# Inicializa o Pygame
-pygame.init()
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
 
-# Configurações da tela
-largura, altura = 800, 600
-tela = pygame.display.set_mode((largura, altura))
-pygame.display.set_caption("Jogo de Catação de Lixo")
+body{
+    background:#f4f4f4;
+    color:#333;
+}
 
-# Cores
-BRANCO = (255, 255, 255)
-VERDE = (0, 200, 0)
+header{
+    background:#2e8b57;
+    color:white;
+    padding:20px;
+}
 
-# Personagem
-jogador = pygame.Rect(400, 300, 50, 50)
+header h1{
+    text-align:center;
+}
 
-# Lista de lixos
-lixos = [pygame.Rect(random.randint(0, largura-20), random.randint(0, altura-20), 20, 20) for _ in range(10)]
+nav{
+    margin-top:15px;
+    text-align:center;
+}
 
-# Pontuação
-pontos = 0
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 15px;
+    font-weight:bold;
+}
 
-# Loop principal
-rodando = True
-while rodando:
-    tela.fill(BRANCO)
+.hero{
+    background:linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)),
+    url('https://images.unsplash.com/photo-1516321497487-e288fb19713f');
+    background-size:cover;
+    background-position:center;
+    height:400px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    color:white;
+}
 
-    # Eventos
-    for evento in pygame.event.get():
-        if evento.type == pygame.QUIT:
-            rodando = False
+.hero h2{
+    font-size:42px;
+}
 
-    # Movimento do jogador
-    teclas = pygame.key.get_pressed()
-    if teclas[pygame.K_LEFT]:
-        jogador.x -= 5
-    if teclas[pygame.K_RIGHT]:
-        jogador.x += 5
-    if teclas[pygame.K_UP]:
-        jogador.y -= 5
-    if teclas[pygame.K_DOWN]:
-        jogador.y += 5
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+    padding:40px 0;
+}
 
-    # Desenha jogador
-    pygame.draw.rect(tela, VERDE, jogador)
+.section-title{
+    text-align:center;
+    color:#2e8b57;
+    margin-bottom:25px;
+}
 
-    # Desenha e verifica coleta de lixo
-    for lixo in lixos[:]:
-        pygame.draw.rect(tela, (0,0,0), lixo)
-        if jogador.colliderect(lixo):
-            lixos.remove(lixo)
-            pontos += 1
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+    gap:20px;
+}
 
-    # Atualiza tela
-    pygame.display.flip()
+.card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
 
-pygame.quit()
+.card h3{
+    color:#2e8b57;
+    margin-bottom:10px;
+}
+
+.formulario{
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+input, textarea{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+button{
+    background:#2e8b57;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#256d46;
+}
+
+footer{
+    background:#222;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:40px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>EcoTech Reciclagem Eletrônica</h1>
+
+    <nav>
+        <a href="#sobre">Sobre</a>
+        <a href="#beneficios">Benefícios</a>
+        <a href="#coleta">Agendar Coleta</a>
+        <a href="#contato">Contato</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div>
+        <h2>Transformando Lixo Eletrônico em Sustentabilidade</h2>
+        <p>Descarte correto para um futuro mais verde.</p>
+    </div>
+</section>
+
+<section id="sobre" class="container">
+    <h2 class="section-title">Sobre o Projeto</h2>
+
+    <p>
+        A EcoTech promove a coleta e reciclagem responsável de equipamentos
+        eletrônicos como computadores, celulares, impressoras, baterias e
+        outros dispositivos. Nosso objetivo é reduzir os impactos ambientais
+        causados pelo descarte inadequado.
+    </p>
+</section>
+
+<section id="beneficios" class="container">
+    <h2 class="section-title">Benefícios da Reciclagem Eletrônica</h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>🌱 Proteção Ambiental</h3>
+            <p>Evita a contaminação do solo e da água por metais pesados.</p>
+        </div>
+
+        <div class="card">
+            <h3>♻ Reaproveitamento</h3>
+            <p>Materiais valiosos podem ser recuperados e reutilizados.</p>
+        </div>
+
+        <div class="card">
+            <h3>💚 Sustentabilidade</h3>
+            <p>Reduz a extração de recursos naturais e o desperdício.</p>
+        </div>
+
+        <div class="card">
+            <h3>👨‍👩‍👧‍👦 Conscientização</h3>
+            <p>Incentiva práticas sustentáveis na comunidade.</p>
+        </div>
+    </div>
+</section>
+
+<section id="coleta" class="container">
+    <h2 class="section-title">Agende sua Coleta</h2>
+
+    <div class="formulario">
+        <form>
+            <input type="text" placeholder="Nome Completo" required>
+
+            <input type="email" placeholder="E-mail" required>
+
+            <input type="tel" placeholder="Telefone" required>
+
+            <input type="text" placeholder="Endereço para Coleta" required>
+
+            <textarea rows="5" placeholder="Descreva os equipamentos para descarte"></textarea>
+
+            <button type="submit">Solicitar Coleta</button>
+        </form>
+    </div>
+</section>
+
+<footer id="contato">
+    <p>EcoTech Reciclagem Eletrônica © 2025</p>
+    <p>Email: contato@ecotech.com.br | Telefone: (43) 99999-9999</p>
+</footer>
+
+</body>
+</html>
