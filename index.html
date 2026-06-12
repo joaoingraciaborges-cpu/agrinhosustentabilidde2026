@@ -1,0 +1,59 @@
+import pygame
+import random
+
+# Inicializa o Pygame
+pygame.init()
+
+# Configurações da tela
+largura, altura = 800, 600
+tela = pygame.display.set_mode((largura, altura))
+pygame.display.set_caption("Jogo de Catação de Lixo")
+
+# Cores
+BRANCO = (255, 255, 255)
+VERDE = (0, 200, 0)
+
+# Personagem
+jogador = pygame.Rect(400, 300, 50, 50)
+
+# Lista de lixos
+lixos = [pygame.Rect(random.randint(0, largura-20), random.randint(0, altura-20), 20, 20) for _ in range(10)]
+
+# Pontuação
+pontos = 0
+
+# Loop principal
+rodando = True
+while rodando:
+    tela.fill(BRANCO)
+
+    # Eventos
+    for evento in pygame.event.get():
+        if evento.type == pygame.QUIT:
+            rodando = False
+
+    # Movimento do jogador
+    teclas = pygame.key.get_pressed()
+    if teclas[pygame.K_LEFT]:
+        jogador.x -= 5
+    if teclas[pygame.K_RIGHT]:
+        jogador.x += 5
+    if teclas[pygame.K_UP]:
+        jogador.y -= 5
+    if teclas[pygame.K_DOWN]:
+        jogador.y += 5
+
+    # Desenha jogador
+    pygame.draw.rect(tela, VERDE, jogador)
+
+    # Desenha e verifica coleta de lixo
+    for lixo in lixos[:]:
+        pygame.draw.rect(tela, (0,0,0), lixo)
+        if jogador.colliderect(lixo):
+            lixos.remove(lixo)
+            pontos += 1
+
+    # Atualiza tela
+    pygame.display.flip()
+
+pygame.quit()
